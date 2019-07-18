@@ -6,6 +6,11 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+// 模板引擎需要放在所有的方法前面
+app.use(views(__dirname + '/views', {
+  extension: 'pug'
+}))
+
 // 引入koa-router组建并且生成router实例
 const Router = require('koa-router')
 const router = new Router()
@@ -17,6 +22,8 @@ const users = require('./routes/users')
 router.use('/users', users)
 // 将router实例挂载在app实例上
 app.use(router.routes()).use(router.allowedMethods())
+
+
 
 // error handler
 onerror(app)
@@ -33,9 +40,7 @@ app.use(logger())
 // 通过localhost:3000/file/file1.jpg就可以访问@/public/file/file1.jpg文件
 app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(views(__dirname + '/views', {
-  extension: 'pug'
-}))
+
 
 // logger
 app.use(async (ctx, next) => {
