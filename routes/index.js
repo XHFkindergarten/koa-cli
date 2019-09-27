@@ -2,6 +2,11 @@
 // 新建路由实例
 const Router = require('koa-router')
 const router = new Router()
+
+
+const Posts = require('../models/PostModel')
+const Tags = require('../models/TagsModel')
+const RelationPostTags = require('../models/RelationPostTagsModel')
 // 引入UserModel实例
 const User = require('../models/UserModel')
 
@@ -11,15 +16,25 @@ router.get('/', async (ctx, next) => {
   })
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
+router.get('/test1', async ctx => {
+  const tags = await RelationPostTags.findAll({
+    where: {
+      post_id: 181
+    },
+    attributes: ['id'],
+    include: {
+      model: Tags,
+      as: 'tags'
+    }
+  })
+  ctx.body = {
+    tags
+  }
 })
 
-router.get('/test', async ctx => {
-  const users = await User.findAll()
-  ctx.status = 200
+router.get('/test2', async ctx => {
   ctx.body = {
-    users
+    msg: 'success'
   }
 })
 

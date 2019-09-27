@@ -20,6 +20,9 @@ router.use(index)
 // 引入users路由
 const users = require('./routes/users')
 router.use('/users', users)
+// 引入wxmini路由
+const wxmini = require('./routes/wxmini')
+router.use('/wxmini', wxmini)
 // 将router实例挂载在app实例上
 app.use(router.routes()).use(router.allowedMethods())
 
