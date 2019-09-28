@@ -1,10 +1,24 @@
 const Koa = require('koa')
 const app = new Koa()
+// 视图渲染包
 const views = require('koa-views')
+// JSON解析包
 const json = require('koa-json')
+// 错误处理
 const onerror = require('koa-onerror')
+// 解析报文主体包
 const bodyparser = require('koa-bodyparser')
+// logger
 const logger = require('koa-logger')
+// 跨域包
+const KoaCors = require('koa-cors')
+// session存储组件
+const koaSession = require('koa-session')
+// WebSocket包
+const websocket = require('koa-websocket')
+// config配置
+const config = require('./config')
+
 
 // 模板引擎需要放在所有的方法前面
 app.use(views(__dirname + '/views', {
@@ -25,6 +39,17 @@ const wxmini = require('./routes/wxmini')
 router.use('/wxmini', wxmini)
 // 将router实例挂载在app实例上
 app.use(router.routes()).use(router.allowedMethods())
+// koa-cors跨域插件
+app.use(KoaCors())
+// koa-session插件
+app.use(koaSession(config.sessionConfig, app))
+
+
+
+app.listen(3000);
+
+
+
 
 
 

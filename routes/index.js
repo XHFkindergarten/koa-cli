@@ -33,8 +33,10 @@ router.get('/test1', async ctx => {
 })
 
 router.get('/test2', async ctx => {
+  ctx.session.name = ctx.query.name
   ctx.body = {
-    msg: 'success'
+    msg: 'success',
+    name: ctx.session.name
   }
 })
 

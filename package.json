@@ -17,9 +17,12 @@
     "koa-json": "^2.0.2",
     "koa-logger": "^2.0.1",
     "koa-onerror": "^1.2.1",
+    "koa-route": "^3.2.0",
     "koa-router": "^7.4.0",
+    "koa-session": "^5.12.3",
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
+    "koa-websocket": "^6.0.0",
     "mysql2": "^1.6.5",
     "pug": "^2.0.0-rc.1",
     "sequelize": "^5.10.1"
